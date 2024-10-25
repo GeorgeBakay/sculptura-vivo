@@ -76,8 +76,8 @@ namespace UBox
             {
                 app.UseHsts();
             }
-            
 
+            app.UseHttpsRedirection();
             app.UseRouting();
             app.UseStaticFiles();
             app.UseMvcWithDefaultRoute();
