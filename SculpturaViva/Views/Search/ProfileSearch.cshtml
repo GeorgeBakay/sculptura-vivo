@@ -1,0 +1,32 @@
+﻿@model UBox.ViewModels.SearchModel
+    <link href="~/css/ProfileSearchStyle.css" rel="stylesheet" type="text/css" />
+<form asp-action="ProfileSearch" asp-controller="Search" asp-anti-forgery="true">
+    <input asp-for="Name" type="text" />
+    <input type="submit" value="Пошук" />
+</form>
+
+@{ if (Model == null)
+    {
+        <p>Введіть імя користувача</p>
+    }
+    else if(Model.ListOfUser.Count == 0)
+    {
+        <p>Користувачів з @Model.Name іменем не знайдено</p>
+    }
+    else
+    {
+        foreach (var el in Model.ListOfUser)
+        {
+            <a asp-action="Profile" asp-controller="Profile" asp-route-userId="@el.Key.Id">
+                <div class="user_element_icon">
+                    <div class="user_element_icon_img">
+                        <img src="@el.Value" />
+                    </div>
+                    
+                    <p>@el.Key.UserName</p>
+                </div>
+            </a>
+            
+        }
+    }
+}

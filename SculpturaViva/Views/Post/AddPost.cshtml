@@ -1,0 +1,24 @@
+﻿@model UBox.ViewModels.AddPostModel
+
+<form asp-action="AddPost" asp-controller="Post" enctype="multipart/form-data" asp-anti-forgery="true">
+    <div class="">
+        <div class="">
+            <label asp-for="PostItem">Фото | Відео</label><br />
+            <input accept=".png,.jpg,.mp4" asp-for="PostItem" />
+            <span asp-validation-for="PostItem" />
+        </div>
+        <div class="">
+            <label asp-for="Description">Опис</label><br />
+            <textarea asp-for="Description"></textarea>
+            <span asp-validation-for="Description" />
+        </div>
+        <div class="">
+            <label asp-for="Friends">Позначте друзів</label><br />
+            <select asp-for="Friends"></select>
+            <span asp-validation-for="Friends" />
+        </div>
+        <div class="">
+            <input class="sub" type="submit" value="Додати пост" />
+        </div>
+    </div>
+</form>

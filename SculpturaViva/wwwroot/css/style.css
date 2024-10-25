@@ -1,0 +1,156 @@
+﻿*{
+    margin:0;
+    padding:0;
+}
+a{
+    text-decoration:none;
+    color:black
+}
+body {
+    height: 100vh;
+    width: 100vw;
+    font-family: 'Roboto Slab', serif;
+    display: flex;
+    
+    flex-direction: row;
+}
+svg{
+    display:inline;
+}
+.logo_mobile{
+    display:none;
+}
+header{
+    animation-name:footer_show;
+    animation-duration:.3s;
+    display:flex;
+    justify-content:flex-start;
+    flex-direction:column;
+    align-items:center;
+    min-width:250px;
+    background-color:white;
+    box-shadow: 2px 0 10px 2px lightgray;
+    
+    z-index:1;
+}
+
+.logo_desktop{
+    margin-top:25px;
+}
+header ul {
+    margin-top: 45px;
+}
+.item{
+    margin-bottom:25px;
+    display:flex;
+    height:30px;
+    line-height:35px;
+    font-size:16px;
+    font-weight:bold;
+    transition:color .2s;
+}
+.item:hover {
+    color: #FA6D6D;
+    fill: #FA6D6D;
+}
+.icon{
+    width:40px;
+    height:35px;
+}
+.icon svg{
+    display:block;
+    max-height:30px;
+    margin:0 auto;
+}
+.item p{
+    margin-left:20px;
+}
+header {
+   
+}
+.content {
+    background-color: #F6F6F6;
+    width: 100%;
+    height: 100%;
+    overflow-y: scroll;
+}
+@keyframes footer_show{
+    0%{
+        opacity:0;
+    }
+    100%{
+        opacity:1;
+    }
+}
+@media(max-width: 450px){
+    body {
+        flex-direction: column-reverse;
+        align-items:center;
+    }
+    .left_items{
+        order:-1;
+    }
+    .center {
+        display: block;
+        border-radius: 8px;
+        width:30px;
+        height:30px;
+        background-color: #FA6D6D;
+        order: 0;
+    }
+    .center svg{
+        max-width:23px;
+    }
+    .add_icon {
+        fill: white;
+    }
+    .right_items{
+        order:1;
+    }
+    .logo_desktop {
+        display: none;
+    }
+    .logo_mobile{
+        
+        margin-left:10px;
+        display:block;
+    }
+        .logo_mobile svg {
+            max-height: 40px;
+        }
+    .user_info{
+        margin-right:10px;
+    }
+    header {
+        background-color:white;
+        width:100%;
+        height: 50px;
+    }
+    header ul{
+        width:90%;
+        margin-top:0;
+        height:100%;
+        display:flex;
+        justify-content:space-between;
+        align-items:center;
+    }
+    .item{
+        margin-bottom:0;
+    }
+    .item p {
+        display:none;
+    }
+    li a{
+        line-height:50px;
+    }
+    .icon svg {
+        display: block;
+        max-height: 30px;
+        
+        margin: auto auto;
+    }
+    .content{
+        padding-top:0px;
+    }
+    
+}

@@ -1,0 +1,111 @@
+﻿@model UBox.ViewModels.MyProfileModel
+@{ 
+    ViewBag.Title = "Мій профіль";
+}
+
+
+<link href="~/css/MyProfileStyle.css" rel="stylesheet" type="text/css" />
+
+<div class="head_of_profile">
+    <img />
+
+
+    <div class="head_of_profile_nav_bar">
+
+        <div class="head_of_profile_nav_bar_buttom">
+            <p>&#9776</p>
+        </div>
+
+        <div class="head_of_profile_nav_bar_content">
+            <ul>
+                <li>
+                    <a class="link" asp-action="Logout" asp-controller="User">Вихід</a>
+                </li>
+            </ul>
+            <ul>
+                <li>
+                    <a class="link" asp-action="Logout" asp-controller="User">Налаштування</a>
+                </li>
+            </ul>
+            <ul>
+                <li>
+                    <a class="link" asp-action="Logout" asp-controller="User">Монетизація</a>
+                </li>
+            </ul>
+        </div>
+
+    </div>
+
+
+
+</div>
+<div class="line"></div>
+
+<div class="my_profile_content">
+
+
+    <div class="my_profile_content_info">
+        <div class="my_profile_content_info_myIcon">
+            <div class="my_profile_content_info_myIcon_avatar">
+                <img src="@Model.imageAvatar"/>
+            </div>
+            <div class="my_profile_content_info_myIcon_name">
+                <p>@Model.user.UserName</p>
+            </div>
+        </div>
+        <div class="my_profile_content_info_myStats">
+            <div class="info_element">
+                <p>Читачі</p>
+                <span>@Model.following.Count</span>
+            </div>
+            <div class="info_element">
+                <p>Стежите</p>
+                <span>@Model.followers.Count</span>
+            </div>
+            <div class="info_element">
+                <p>Дописи</p>
+                <span>@Model.posts.Count</span>
+            </div>
+        </div>
+    </div>
+    <div class="my_profile_content_posts">
+        @{
+            if (Model.posts.Count == 0)
+            {
+                <p>У вас ще немає постів <a asp-action="AddPost" asp-controller="Post">Додати пост</a></p>
+
+            }
+            else
+            {
+                foreach (var el in Model.posts)
+                {
+                    <div class="posts_element">
+                        <div class="posts_element_content">
+                            @{
+                                if (el.FileType == ".mp4")
+                                {
+                                    <video autoplay loop>
+                                        <source src="@el.PostFilePath" type="video/mp4" />
+                                        Ваш браузер не підтримує цей відео тег
+                                    </video>
+                                }
+                                else if (el.FileType == ".jpg" || el.FileType == ".png")
+                                {
+                                    <img src="@el.PostFilePath" />
+                                }
+                            }
+                        </div>
+
+
+                        <p>@el.Description</p>
+                    </div>
+                }
+            }
+        }
+
+    </div>
+
+
+
+
+</div>

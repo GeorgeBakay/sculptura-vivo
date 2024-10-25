@@ -1,0 +1,133 @@
+﻿@model UBox.ViewModels.ProfileModel
+@{
+    ViewBag.Title = Model.user;
+}
+
+
+<link href="~/css/MyProfileStyle.css" rel="stylesheet" type="text/css" />
+
+<div class="head_of_profile">
+    <img />
+
+</div>
+<div class="line"></div>
+
+<div class="my_profile_content">
+
+
+    <div class="my_profile_content_info">
+        <div class="my_profile_content_info_myIcon">
+            <div class="my_profile_content_info_myIcon_avatar">
+                <img src="@Model.imageAvatar" />
+            </div>
+            <div class="my_profile_content_info_myIcon_name">
+                <p>@Model.user.UserName</p>
+            </div>
+            <div class="my_profile_content_info_myIcon_name_buttom">
+                  
+                    @{ 
+                        if (Model.isFollow == true)
+                        {
+                            <div class="follow_action unfollow" id="followAction">
+                                <p>Відстежується</p>
+                            </div>
+                            
+                        }
+                        else
+                        {
+                            <div class="follow_action follow" id="followAction">
+                                <p>Підписатися</p>
+                            </div>
+                        }
+                    }
+            </div>
+        </div>
+        <div class="my_profile_content_info_myStats">
+            <div class="info_element">
+                <p>Читачі</p>
+                <span>@Model.following.Count</span>
+            </div>
+            <div class="info_element">
+                <p>Стежить</p>
+                <span>@Model.followers.Count</span>
+            </div>
+            <div class="info_element">
+                <p>Дописи</p>
+                <span>@Model.posts.Count</span>
+            </div>
+
+
+        </div>
+
+    </div>
+
+
+    <div class="my_profile_content_posts">
+        @{
+            if (Model.posts.Count == 0)
+            {
+                <p>наразі користувач не робив пости</p>
+            }
+            else
+            {
+                foreach (var el in Model.posts)
+                {
+                    <div class="posts_element">
+
+                        <div class="posts_element_content">
+                            @{
+                                if (el.FileType == ".mp4")
+                                {
+                                    <video autoplay loop>
+                                        <source src="@el.PostFilePath" type="video/mp4" />
+                                        Ваш браузер не підтримує цей відео тег
+                                    </video>
+                                }
+                                else if (el.FileType == ".jpg" || el.FileType == ".png")
+                                {
+                                    <img src="@el.PostFilePath" />
+                                }
+                            }
+                        </div>
+
+                        
+                        <p>@el.Description</p>
+                    </div>
+                }
+            }
+        }
+
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script type="text/javascript">
+    followAction = document.getElementById('followAction');
+    console.log(followAction);
+    
+    $(followAction).click(function () {
+      
+        name = "@Model.user.UserName";
+        console.log(name);
+        $.ajax({
+            type: "POST",
+            url: "@Url.Action("Follow")",
+            data: { userName: name },
+            dataType: "text",
+            success: function (response) {
+                if (response == "false") {
+                    followAction.innerHTML = "Відстежується";
+                    followAction.style.background = '#1E1E1E';
+                }
+                else {
+                    followAction.innerHTML = "Підписатися";
+                    followAction.style.backgroundColor = '#FA6D6D';
+                }
+                console.log(response);
+            },
+            error: function (req, status, error) {
+                console.log(msg);
+            },
+        });
+    });
+</script>

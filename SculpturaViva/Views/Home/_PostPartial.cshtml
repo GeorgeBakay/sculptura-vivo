@@ -1,0 +1,47 @@
+﻿@model PostPartialView
+<div class="posts_element">
+
+    <div class="posts_element_content">
+        @{
+            if (Model.post.FileType == ".mp4")
+            {
+                <video autoplay loop>
+                    <source src="@Model.post.PostFilePath" type="video/mp4" />
+                    Ваш браузер не підтримує цей відео тег
+                </video>
+            }
+            else if (Model.post.FileType == ".jpg" || Model.post.FileType == ".png")
+            {
+                <img src="@Model.post.PostFilePath" />
+            }
+        }
+    </div>
+
+    <div class="post_info">
+        <a asp-controller="Profile" asp-action="Profile" asp-route-userId="@Model.post.User.userId">
+            <div class="post_info_user">
+                <div class="post_info_user_img">
+                    <img src="@Model.avatar" />
+                </div>
+
+                <p>@Model.post.User.user.UserName</p>
+            </div>
+        </a>
+        <div class="post_info_descripion">
+            <p>@Model.post.Description</p>
+        </div>
+        <div class="post_info_comments">
+            <p>В майбутньому тут будуть коментарі</p>
+        </div>
+        <div class="post_info_action">
+            <div class="likeButton" id="@Model.post.Id">
+                <svg width="25" height="23" viewBox="0 0 25 23" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path class="path" d="M22.6995 1.94516C22.0825 1.32817 21.35 0.838813 20.5438 0.505053C19.7376 0.171293 18.8735 -0.000327185 18.0009 4.68275e-07C17.1284 0.000328121 16.2644 0.172597 15.4585 0.506963C14.6526 0.841328 13.9204 1.33124 13.3039 1.94869L12.4991 2.76327L11.701 1.95045L11.6958 1.94526C11.0791 1.32856 10.347 0.839372 9.54124 0.505616C8.73549 0.171861 7.87189 7.9044e-05 6.99974 7.9044e-05C6.1276 7.9044e-05 5.264 0.171861 4.45825 0.505616C3.6525 0.839372 2.92037 1.32856 2.30368 1.94526L1.94516 2.30379C0.699694 3.54925 0 5.23847 0 6.99982C0 8.76118 0.699694 10.4504 1.94516 11.6959L11.4075 21.1581L12.476 22.2777L12.5015 22.2521L12.5292 22.2798L13.5303 21.2235L23.058 11.6957C24.3016 10.4493 25 8.76041 25 6.99967C25 5.23893 24.3016 3.55009 23.058 2.30363L22.6995 1.94516ZM21.8837 10.5217L12.5015 19.9041L3.1191 10.5217C2.185 9.58762 1.66023 8.32071 1.66023 6.99969C1.66023 5.67868 2.185 4.41177 3.1191 3.47767L3.47767 3.11915C4.41131 2.18551 5.67746 1.66078 6.99782 1.66029C8.31819 1.65979 9.58473 2.18357 10.5191 3.1165L12.4955 5.12895L14.4813 3.11915C14.9439 2.65663 15.4929 2.28973 16.0973 2.03941C16.7016 1.7891 17.3493 1.66026 18.0034 1.66026C18.6575 1.66026 19.3052 1.7891 19.9095 2.03941C20.5138 2.28973 21.0629 2.65663 21.5254 3.11915L21.884 3.47762C22.8166 4.41249 23.3404 5.67915 23.3404 6.99971C23.3403 8.32027 22.8165 9.5869 21.8837 10.5217Z" fill="black" />
+                </svg>
+            </div>
+        </div>
+        
+
+    </div>
+
+</div>
